@@ -27,14 +27,25 @@ public class StudentController {
 
     @GetMapping("all")
     public @ResponseBody
-    List<Student> fetchStudent() {
+    List<Student> fetchStudents() {
         return studentDaoService.fetchStudents();
     }
 
-    @PostMapping("/add")
+    @GetMapping("/{id}")
+    public @ResponseBody
+    Student fetchStudent(@PathVariable int id) {
+        return studentDaoService.findById(id).orElse(null);
+    }
+
+    @PostMapping
     public @ResponseBody
     int addStudent(@RequestBody Student student) {
+        return studentDaoService.save(student);
+    }
 
-        return studentDaoService.insertStudent(student);
+    @PutMapping("/{id}")
+    public @ResponseBody
+    int updateStudent(@RequestBody Student student, @PathVariable int id) {
+        return studentDaoService.updateStudent(id, student);
     }
 }
