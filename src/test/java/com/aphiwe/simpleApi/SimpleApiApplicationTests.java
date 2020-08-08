@@ -76,6 +76,6 @@ class SimpleApiApplicationTests {
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("200")));
+                .andExpect(content().string(containsString("204")));
     }
 }
