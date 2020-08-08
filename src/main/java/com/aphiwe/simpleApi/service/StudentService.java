@@ -32,11 +32,12 @@ public class StudentService implements StudentDao {
 
     @Override
     public int updateStudent(int id, Student student) {
-        if(!findById(student.getId()).isEmpty()&&id==student.getId()){
-            students.remove(findById(id).get());
+        if(findById(student.getId()).isPresent() && id==student.getId()){
+             students.remove(findById(id).get());
              students.add(student);
+            return 204;
            };
-        return 200;
+        return 204;
     }
 
     @Override
