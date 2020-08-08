@@ -24,10 +24,8 @@ public class StudentService implements StudentDao {
     public List<Student> fetchStudents() {
         if (students.isEmpty()) {
             students.add(new Student(1, "Aphiwe", 45.5));
-            return students;
-        } else {
-            return students;
         }
+        return students;
     }
 
     @Override
@@ -35,7 +33,6 @@ public class StudentService implements StudentDao {
         if(findById(student.getId()).isPresent() && id==student.getId()){
              students.remove(findById(id).get());
              students.add(student);
-            return 204;
            };
         return 204;
     }
