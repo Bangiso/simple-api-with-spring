@@ -1,12 +1,13 @@
 package com.aphiwe.simpleApi.api;
 
+import com.aphiwe.simpleApi.dao.StudentDao;
 import com.aphiwe.simpleApi.model.Student;
-import com.aphiwe.simpleApi.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Controller
@@ -33,8 +34,8 @@ public class StudentController {
 
     @GetMapping("/{id}")
     public @ResponseBody
-    Student fetchStudent(@PathVariable int id) {
-        return studentDaoService.findById(id).orElse(null);
+    Optional<Student> fetchStudent(@PathVariable int id) {
+        return studentDaoService.findById(id);
     }
 
     @PostMapping
@@ -43,9 +44,15 @@ public class StudentController {
         return studentDaoService.save(student);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping
     public @ResponseBody
-    int updateStudent(@RequestBody Student student, @PathVariable int id) {
-        return studentDaoService.updateStudent(id, student);
+    int updateStudent(@RequestBody Student student) {
+        return studentDaoService.updateStudent(student);
+    }
+
+    @DeleteMapping("/{id}")
+    public @ResponseBody
+    int deleteStudent(@PathVariable int id) {
+        return studentDaoService.deleteStudent(id);
     }
 }
