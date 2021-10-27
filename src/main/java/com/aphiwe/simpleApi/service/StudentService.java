@@ -23,10 +23,12 @@ public class StudentService implements StudentDao {
 
     @Override
     public int save(Student student) {
-        String sql = "INSERT INTO students (id, name, gpa) VALUES (?, ?, ?)";
-        int result = jdbcTemplate.update(sql, student.getId(), student.getName(), student.getGpa());
-        if (result > 0) {
-            logger.info("new student added");
+        if(student.getId()!=0 && student.getName()!=null && student.getName()!="") {
+            String sql = "INSERT INTO students (id, name, gpa) VALUES (?, ?, ?)";
+            int result = jdbcTemplate.update(sql, student.getId(), student.getName(), student.getGpa());
+            if (result > 0) {
+                logger.info("new student added");
+            }
         }
         return 204;
     }
