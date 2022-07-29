@@ -1,18 +1,13 @@
 package com.aphiwe.simpleApi;
 
-import com.aphiwe.simpleApi.api.StudentController;
-import com.aphiwe.simpleApi.service.StudentService;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @EnableAutoConfiguration
+@EnableWebMvc
 @SpringBootApplication
-
-@ComponentScan(basePackageClasses = StudentController.class)
-@ComponentScan(basePackageClasses = StudentService.class)
 public class SimpleApiApplication {
 
 	public static void main(String[] args) {

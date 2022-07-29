@@ -1,7 +1,5 @@
 package com.aphiwe.simpleApi.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.Objects;
 
 public class Student {
@@ -23,7 +21,7 @@ public class Student {
     }
 
 
-    public Student(@JsonProperty("id") int id, @JsonProperty("name") String name, @JsonProperty("gpa") double gpa) {
+    public Student( int id, String name, double gpa) {
         this.id = id;
         this.name = name;
         this.gpa = gpa;
