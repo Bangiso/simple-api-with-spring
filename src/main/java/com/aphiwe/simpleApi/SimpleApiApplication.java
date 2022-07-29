@@ -1,7 +1,7 @@
 package com.aphiwe.simpleApi;
 
 import com.aphiwe.simpleApi.api.StudentController;
-import com.aphiwe.simpleApi.dao.StudentDao;
+import com.aphiwe.simpleApi.service.StudentService;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -12,7 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 
 @ComponentScan(basePackageClasses = StudentController.class)
-@ComponentScan(basePackageClasses = StudentDao.class)
+@ComponentScan(basePackageClasses = StudentService.class)
 public class SimpleApiApplication {
 
 	public static void main(String[] args) {

@@ -1,7 +1,7 @@
-package com.aphiwe.simpleApi.service;
+package com.aphiwe.simpleApi.dao;
 
-import com.aphiwe.simpleApi.dao.StudentDao;
 import com.aphiwe.simpleApi.model.Student;
+import com.aphiwe.simpleApi.service.StudentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +14,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class StudentService implements StudentDao {
+public class StudentDao implements StudentService {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    Logger logger = LoggerFactory.getLogger(StudentService.class);
+    Logger logger = LoggerFactory.getLogger(StudentDao.class);
 
     @Override
     public int save(Student student) {

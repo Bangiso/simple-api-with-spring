@@ -1,6 +1,6 @@
 package com.aphiwe.simpleApi.api;
 
-import com.aphiwe.simpleApi.dao.StudentDao;
+import com.aphiwe.simpleApi.service.StudentService;
 import com.aphiwe.simpleApi.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,10 +14,10 @@ import java.util.Optional;
 @RequestMapping("/students")
 public class StudentController {
     @Autowired
-    private StudentDao studentDaoService;
+    private StudentService studentService;
 
-    public StudentController(StudentDao studentDaoService) {
-        this.studentDaoService = studentDaoService;
+    public StudentController(StudentService studentDaoService) {
+        this.studentService = studentDaoService;
     }
 
     @GetMapping
@@ -29,30 +29,30 @@ public class StudentController {
     @GetMapping("all")
     public @ResponseBody
     List<Student> fetchStudents() {
-        return studentDaoService.fetchStudents();
+        return studentService.fetchStudents();
     }
 
     @GetMapping("/{id}")
     public @ResponseBody
     Optional<Student> fetchStudent(@PathVariable int id) {
-        return studentDaoService.findById(id);
+        return studentService.findById(id);
     }
 
     @PostMapping
     public @ResponseBody
     int addStudent(@RequestBody Student student) {
-        return studentDaoService.save(student);
+        return studentService.save(student);
     }
 
     @PutMapping
     public @ResponseBody
     int updateStudent(@RequestBody Student student) {
-        return studentDaoService.updateStudent(student);
+        return studentService.updateStudent(student);
     }
 
     @DeleteMapping("/{id}")
     public @ResponseBody
     int deleteStudent(@PathVariable int id) {
-        return studentDaoService.deleteStudent(id);
+        return studentService.deleteStudent(id);
     }
 }
