@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-rest-api
+spec:
+  selector:
+    matchLabels:
+      app: spring-rest-api
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: spring-rest-api
+    spec:
+      containers:
+        - image: aphiwe2020/simple-api-with-spring:0.0.3
+          name: spring-rest-api
+          env:
+            - name: MYSQL_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: username
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: password
+          ports:
+            - containerPort: 8088
+              name: spring-rest-api
+          readinessProbe:
+            initialDelaySeconds: 15
+            periodSeconds: 20
+            successThreshold: 3
+            httpGet:
+              path: /students
+              port: 8088
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-rest-api-svc
+spec:
+  ports:
+    - port: 8088
+      targetPort: 8088
+  selector:
+    app: spring-rest-api
+  externalTrafficPolicy: Local
+  type: LoadBalancer

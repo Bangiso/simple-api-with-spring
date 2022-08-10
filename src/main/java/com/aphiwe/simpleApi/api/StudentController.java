@@ -11,7 +11,8 @@ import java.util.Optional;
 
 
 @Controller
-@RequestMapping("/students")
+@CrossOrigin(origins = "*")
+@RequestMapping()
 public class StudentController {
     @Autowired
     private StudentService studentService;
@@ -20,37 +21,37 @@ public class StudentController {
         this.studentService = studentDaoService;
     }
 
-    @GetMapping
+    @GetMapping("/")
     public @ResponseBody
     String index() {
         return "Welcome to students list";
     }
 
-    @GetMapping("all")
+    @GetMapping("/students")
     public @ResponseBody
     List<Student> fetchStudents() {
         return studentService.fetchStudents();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/students/{id}")
     public @ResponseBody
     Optional<Student> fetchStudent(@PathVariable int id) {
         return studentService.findById(id);
     }
 
-    @PostMapping
+    @PostMapping("/students")
     public @ResponseBody
     int addStudent(@RequestBody Student student) {
         return studentService.save(student);
     }
 
-    @PutMapping
+    @PutMapping("/students")
     public @ResponseBody
     int updateStudent(@RequestBody Student student) {
         return studentService.updateStudent(student);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/students/{id}")
     public @ResponseBody
     int deleteStudent(@PathVariable int id) {
         return studentService.deleteStudent(id);

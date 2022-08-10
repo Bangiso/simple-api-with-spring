@@ -57,7 +57,7 @@ class SimpleApiApplicationTests {
 
     @Test
     public void testIndexPage() throws Exception {
-        this.mockMvc.perform(get("/students"))
+        this.mockMvc.perform(get("/"))
                 .andDo(print())
                 .andExpect(status().isOk()).andExpect(content().string(containsString("Welcome to students list")));
     }
@@ -66,7 +66,7 @@ class SimpleApiApplicationTests {
     public void testFetchStudents() throws Exception {
 
         when(studentDao.fetchStudents()).thenReturn(Arrays.asList(new Student(3, "Will", 78.5)));
-        this.mockMvc.perform(get("/students/all"))
+        this.mockMvc.perform(get("/students"))
                 .andDo(print())
                 .andExpect(status().isOk())
                .andExpect(content().json(String.valueOf(new JSONArray("[{\"gpa\":78.5,\"name\":\"Will\",\"id\":3}]"))));;
